@@ -3,6 +3,7 @@ version: '2'
 x-build-opts: &x-build-opts
   build:
     context: .
+    dockerfile: ./Dockerfile
 
 x-logging-opts: &x-logging-opts
   logging:
@@ -18,5 +19,6 @@ services:
     <<: *x-logging-opts
     image: maliciousgenius/doer
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      # сокет - это канал деятелю и источнику
+      # - /var/run/docker.sock:/var/run/docker.sock
       - ./space:/space:rw
