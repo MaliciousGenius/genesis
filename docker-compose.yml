@@ -17,6 +17,9 @@ services:
   genesis:
     <<: *x-build-opts
     <<: *x-logging-opts
+    environment:
+      - JUPYTER_ENABLE_LAB="yes"
     volumes:
-      # сокет - это один из каналов к деятелю и источнику
-      - /var/run/docker.sock:/var/run/docker.sock
+      - './work:/home/jovyan/work:rw'
+    ports:
+      - '8888:8888/tcp'
