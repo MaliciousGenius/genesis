@@ -1,9 +1,7 @@
-version: '2'
-
 x-build-opts: &x-build-opts
   build:
     context: .
-    dockerfile: ./Dockerfile
+    dockerfile: ./dockerfile
 
 x-logging-opts: &x-logging-opts
   logging:
@@ -15,11 +13,12 @@ x-logging-opts: &x-logging-opts
 services:
 
   genesis:
-    <<: *x-build-opts
-    <<: *x-logging-opts
+    <<:
+      - *x-build-opts
+      - *x-logging-opts
     environment:
       - JUPYTER_ENABLE_LAB="yes"
     volumes:
-      - './work:/home/jovyan/work:rw'
+      - './workspace:/home/jovyan/work:rw'
     ports:
       - '8888:8888/tcp'

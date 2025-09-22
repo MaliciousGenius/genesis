@@ -8,31 +8,31 @@ export NAME?=$(shell echo $(shell basename $(shell pwd)) | awk '{print tolower($
 # -------------------------------------------------------------------------------------------------------------
 # цели
 $(NAME): down image container
-	# @docker-compose run --rm $(NAME) /bin/bash -с /srv/client
+	@docker compose run --rm $(NAME) /bin/bash -с /srv/client
 
 # деинсталлировать
 down:
-	@docker-compose down
+	@docker compose down -v
 
 # собрать образ
 image:
-	# @docker-compose build --force-rm --no-cache $(NAME)
-	@docker-compose build $(NAME)
-	@docker-compose push
+	@docker compose build --force-rm --no-cache $(NAME)
+	@docker compose build $(NAME)
+	@docker compose push
 
 # запустить сонтейнер
 container:
-	@docker-compose up -d
+	@docker compose up -d
 
 # консоль
 shell:
-	@docker-compose run --rm $(NAME) /bin/bash
-	# @docker-compose exec $(NAME) /bin/bash
+	@docker compose run --rm $(NAME) /bin/bash
+	# @docker compose exec $(NAME) /bin/bash
 
 # информация
 info:
-	@docker-compose ps
+	@docker compose ps
 
 # журнал
 logs:
-	@docker-compose logs
+	@docker compose logs
